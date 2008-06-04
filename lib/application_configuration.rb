@@ -1,7 +1,10 @@
+require 'rubygems'
 require 'singleton'
 require 'yaml'
 require 'erb'
 require 'open-uri'
+require 'facets'
+require 'facets/times'
 module Application
   
   class Configuration

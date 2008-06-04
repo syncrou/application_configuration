@@ -1,0 +1,54 @@
+pickles: rock!
+reload_settings_every: <%= 2.seconds %>
+my::foo: "my foo"
+whiny_config_missing: false
+all_debate_pairing_options: 
+  - 
+    - "Pro"
+    - "Con"
+  -
+    - "Yes"
+    - "No"
+  - 
+    - "For"
+    - "Against"
+  - 
+    - "Agree"
+    - "Disagree"
+  - 
+    - "Support"
+    - "Oppose"
+  - 
+    - "True"
+    - "False"
+  - 
+    - "Innocent"
+    - "Guilty"
+  - 
+    - "Right"
+    - "Wrong"
+
+foo_bar_cache_options:
+  default_expiry: <%= 3.seconds %>
+  adapter: local_memory
+  marshall_method: yaml
+  
+your_temp_options_cache_options:
+  adapter: file
+  store_options:
+    dir: /cachetastic/test
+    
+cachetastic_default_options:
+  debug: true
+  adapter: local_memory
+  marshall_method: none
+  default_expiry: <%= 24.hours %>
+  logging:
+    # logger_1:
+    #   type: file
+    #   file: log/memcached.log
+    logger_2:
+      type: console
+      level: debug
+      
+should_be_false: false

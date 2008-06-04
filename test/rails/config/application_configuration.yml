@@ -1,0 +1,113 @@
+foo: bar
+four: <%= 2 + 2 %>
+my_hash:
+  one: 1
+  two: 2
+  three: <%= 1 + 2 %>
+my_time: <%= Time.now.beginning_of_month %>
+my_array:
+  - 1
+  - 2
+  - 3
+  - mark
+  - bates
+pickles: are yummy!
+mark::name: "marky kang"
+url_test: local
+radiant_server_url: http://localhost:3001
+cms_layouts:
+  about: my_test_layout
+  foo: another_layout
+default_cms_layout: application
+radiant_server_time_out: <%= 1.second %>
+whiny_config_missing: false
+reload_settings_every: <%= 1.hour %>
+
+# rails_sales_visa:
+#   gateway: paypal
+#   login: seller_1193780413_biz_api1.helium.com
+#   password: VJ4SZRNE6TB7T6Q5
+
+rails_sales_default:
+  # gateway: paypal
+  # login: seller_1193780413_biz_api1.helium.com
+  # password: VJ4SZRNE6TB7T6Q5
+  gateway: authorize_net
+  login: 2fD6yH48
+  password: 29AVG493Sh4j6utn
+
+rails_sales_currency_type_default: USD
+
+page_cache_storage: cachetastic
+  
+album_cache_options:
+  servers:
+    - 127.0.0.1:11211
+    
+doctor_be_cache_options:
+  adapter: drb
+  store_options:
+    host: "druby://127.0.0.1:61676"
+    
+doctor_ce_cache_options:
+  adapter: drb
+  store_options:
+    host: "druby://127.0.0.1:61676"
+    
+cachetastic_caches_page_cache_options:
+  default_expiry: <%= 1.hour %>
+  expiry_swing: <%= 15.minutes %>
+
+cachetastic_caches_rails_session_cache_options:
+  adapter: local_memory
+  store_options:
+    dir: /cachetastic/
+
+memcache_benchmark_cache_options:
+  debug: false
+  adapter: memcache
+  marshall_method: none
+  store_options:  
+    c_threshold: 10_000
+    compression: true
+    debug: false
+    readonly: false
+    urlencode: false
+
+my_file_store_cache_options:
+  debug: false
+  adapter: file
+  store_options:
+    dir: "/cachetastic/test"
+    
+file_benchmark_cache_options:
+  debug: false
+  adapter: file
+  store_options:
+    dir: "/cachetastic/benchmark"
+    
+local_memory_benchmark_cache_options:
+  debug: false
+  adapter: local_memory
+  
+cachetastic_default_options:
+  debug: true
+  adapter: local_memory
+  marshall_method: none
+  default_expiry: <%= 24.hours %>
+  # buffer: simple
+  # store_options:  
+  #   c_threshold: 10_000
+  #   compression: true
+  #   debug: false
+  #   readonly: false
+  #   urlencode: false
+  logging:
+    # logger_1:
+    #   type: file
+    #   file: log/memcached.log
+    logger_2:
+      type: console
+      level: error
+  # servers:
+  #   - 127.0.0.1:11211
