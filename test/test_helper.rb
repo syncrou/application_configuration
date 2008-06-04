@@ -2,6 +2,7 @@ require 'rubygems'
 require "test/unit"
 require 'rake'
 require 'fileutils'
+require 'facets/times'
 require File.join(File.dirname(__FILE__), "..", "lib", "application_configuration")
 
 RAILS_ENV = "test"

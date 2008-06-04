@@ -1,0 +1,50 @@
+There are no setters available for the configuration settings. You have to edit the files in order to update the settings.
+To retrieve a setting: 
+app_config.setting_name
+
+or 
+Application::Configuration.setting_name
+In Rails the load order of configuration files is as follows:
+application_configuration.yml
+application_configuration_RAILS_ENV.yml
+Configuration settings behave just like Rails environment files do. If you have a configuration setting specified in both application_configuration.yml and application_configuration_development.yml the setting in application_configuration_development.yml will override the the one in application_configuration.yml.
+# application_configuration.yml:
+email_address: help@helium.com
+
+# application_configuration_development.yml:
+email_address: help@localhost
+
+# console in development mode:
+app_config.email_address # => 'help@localhost'
+
+# console in production or test mode:
+app_config.email_address # => 'help@helium.com'
+Settings get reloaded every minute by default. There is no need to restart the app if you make a config file change. This can be changed by setting the following in your config yml file:
+reload_settings_every: <%= 24.hours %> # or some other length of time.
+Settings can be namespaced. In order to help better ‘group’ settings together. Settings in the yml files can be namespace using the familiar Ruby syntax of ’::’:
+my::name: "mark bates" 
+my::email: "mbates@helium.com" 
+
+# console:
+app_config.my.name # => "mark bates" 
+app_config.my.email # => "mbates@helium.com
+
+app_config.my__name # => "mark bates" 
+app_config.my__email # => "mbates@helium.com" #notice the double '_'
+The config yml files get run through ERB so you can do things like:
+time_right_now: <%= Time.now %>
+twenty_four_hours: <%= 1.day %>
+To load additional files put the following in environment.rb (or your specific environment if you want to only load them in a particular environment):
+app_config.load_file(full_path_to_file)
+
+or
+Application::Configuration.load_file(full_path_to_file)
+
+Anything you set in this new file will override, if any, settings from the other files previously loaded. You can call ‘load_file’ as many times as you would like to load as many files as you like. The order in which you load the files determines the precedent for settings getting overridden, so make sure you load them in the correct sequence. The order in which these files get loaded in will be preserved on subsequent reloads of the settings.
+To reload settings you simply need to do the following:
+app_config.reload
+
+or
+Application::Configuration.reload
+
+Keep in mind that if you’re trying to reload the settings for your running app, it will do you no good to go into a console window and type this command as the settings are cached per instance of your rails app, and opening a console window is a different instance then the one currently running in mongel. If you wish to reload your settings on every request you can put this command in your application.rb file. But make sure you REMOVE it before you check in.

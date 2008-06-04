@@ -29,8 +29,8 @@ gem_spec = Gem::Specification.new do |s|
   #s.bindir = "bin"
   #s.executables << "application_configuration"
   #s.default_executable = ""
-  s.add_dependency("facets")
-  s.add_dependency("english")
+  # s.add_dependency("facets")
+  # s.add_dependency("english")
   # s.add_dependency("mack_ruby_core_extensions")
   # s.add_dependency("application_configuration")
   #s.add_dependency("", "")
