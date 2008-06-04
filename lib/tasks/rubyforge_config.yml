@@ -1,0 +1,5 @@
+--- !ruby/object:RubyForgeConfig 
+gem_name: application_configuration
+package: application_configuration
+project: magrathea
+version: 1.2.2
