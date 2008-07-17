@@ -16,8 +16,10 @@ module Application
       def method_missing(sym, *args)
         inst = Application::Configuration.instance
         # check to see if the configuration needs to be reloaded.
-        if (Time.now - (inst.reload_settings_every || DEFAULT_RELOAD_SETTINGS_EVERY)) > inst.last_reload_time
-          inst.reload
+        unless inst.reload_settings_every == -1
+          if (Time.now - (inst.reload_settings_every || DEFAULT_RELOAD_SETTINGS_EVERY)) > inst.last_reload_time
+            inst.reload
+          end
         end
         inst.send(sym, *args)
       end
