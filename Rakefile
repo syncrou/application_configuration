@@ -8,7 +8,7 @@ require 'rubyforge'
 require 'rubygems'
 require 'rubygems/gem_runner'
 
-GEM_VERSION = "1.5.0"
+GEM_VERSION = "1.5.1"
 GEM_NAME = "application_configuration"
 GEM_RUBYFORGE_PROJECT = "magrathea"
 
