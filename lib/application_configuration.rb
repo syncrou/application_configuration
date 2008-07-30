@@ -2,7 +2,6 @@ require 'rubygems'
 require 'singleton'
 require 'yaml'
 require 'erb'
-require 'open-uri'
 module Application
   
   class Configuration
@@ -66,6 +65,7 @@ module Application
     end
     
     def load_url(path_to_file)
+      require 'open-uri'
       unless path_to_file.nil?
         begin
           path_to_file = Application::Configuration::Location.new(path_to_file, Application::Configuration::Location::URL) if path_to_file.is_a? String
