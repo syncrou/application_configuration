@@ -8,7 +8,7 @@ require 'rubyforge'
 require 'rubygems'
 require 'rubygems/gem_runner'
 
-GEM_VERSION = "1.5.2"
+GEM_VERSION = "1.5.3"
 GEM_NAME = "application_configuration"
 GEM_RUBYFORGE_PROJECT = "magrathea"
 
@@ -68,6 +68,7 @@ desc "Release the gem"
 task :release => :install do |t|
   begin
     rf = RubyForge.new
+    rf.configure
     rf.login
     begin
       rf.add_release(GEM_RUBYFORGE_PROJECT, GEM_NAME, GEM_VERSION, File.join("pkg", "#{GEM_NAME}-#{GEM_VERSION}.gem"))

@@ -146,7 +146,8 @@ WARNING: Tried to access configuration parameter: #{sym}, but there is no config
     def handle_settings(settings, location)
       @final_configuration_settings.merge!(settings || {})
       # puts "@final_configuration_settings: #{@final_configuration_settings.inspect}"
-      self.final_configuration_settings.each_pair do |k,v|
+      fcs = @final_configuration_settings.dup
+      self.final_configuration_settings.dup.each_pair do |k,v|
         k = k.to_s.downcase
         # start a list of methods that need to be generated
         # methods can't have :: in them so convert these to __.
@@ -156,9 +157,9 @@ WARNING: Tried to access configuration parameter: #{sym}, but there is no config
           mod = vars.first # namespace
           e_meths << mod # generate a method for the namespace
           # create a new Namespace object for this name space and assign it to the final_configuration_settings hash.
-          self.final_configuration_settings[mod.to_s] = Application::Configuration::Namespace.new(mod.to_s)
+          fcs[mod.to_s] = Application::Configuration::Namespace.new(mod.to_s)
           # add an entry for the __ version of the key so our __ method can call it.
-          self.final_configuration_settings[e_meths.first] = v
+          fcs[e_meths.first] = v
         end
         # generate all the necessary getter methods
         e_meths.each do |m|
@@ -173,7 +174,7 @@ WARNING: Tried to access configuration parameter: #{sym}, but there is no config
           }
         end
       end
-      
+      @final_configuration_settings = fcs
       @loaded_files << location
       @loaded_files.uniq!
     end
