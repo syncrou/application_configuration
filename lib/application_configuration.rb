@@ -87,19 +87,19 @@ module Application
     end
     
     def reload
-      puts "Loading Configuration Settings!"
+      #puts "Loading Configuration Settings!"
       @final_configuration_settings = {:reload_settings_every => DEFAULT_RELOAD_SETTINGS_EVERY} # reset the configuration
 
       self.loaded_files.each do |lf|
         case lf.type
         when Application::Configuration::Location::FILE
-          puts "Loading Configuration Settings from file: #{lf.name}"
+          #puts "Loading Configuration Settings from file: #{lf.name}"
           load_file(lf)
         when Application::Configuration::Location::URL
-          puts "Loading Configuration Settings from url: #{lf.name}"
+          #puts "Loading Configuration Settings from url: #{lf.name}"
           load_url(lf)
         when Application::Configuration::Location::HASH
-          puts "Loading Configuration Settings from hash: #{lf.name}"
+          #puts "Loading Configuration Settings from hash: #{lf.name}"
           load_hash(lf.options, lf.name)
         else
           raise TypeError.new("The Application::Configuration::Location type '#{lf.type}' is not supported!")
