@@ -38,13 +38,13 @@ module Application
       @loaded_files = []
       @final_configuration_settings = {:reload_settings_every => DEFAULT_RELOAD_SETTINGS_EVERY}
       @last_reload_time = Time.now # set the first load time
-      @is_rails = Object.const_defined?("RAILS_ENV") # set whether it's rails
+      @is_rails = Rails.class == Module && Rails.respond_to?(:env) # set whether it's rails
       if self.is_rails
-        @rails_root = Rails.class == Module && Rails.respond_to?(:env) ? Rails.root : ""
-        @rails_env = Rails.class == Module && Rails.respond_to?(:env) ? Rails.root : ""
+        @rails_root = Rails.root
+        @rails_env = Rails.env
         self.whiny_config_missing = true unless Rails.env == "production"
         self.loaded_files << Application::Configuration::Location.new("#{Rails.root}/config/application_configuration.yml")
-        self.loaded_files << Application::Configuration::Location.new("#{Rails.root}/config/application_configuration_#{self.rails_env}.yml")
+        self.loaded_files << Application::Configuration::Location.new("#{Rails.root}/config/application_configuration_#{Rails.env}.yml")
         self.loaded_files.uniq!
       end
       reload # do the work!
